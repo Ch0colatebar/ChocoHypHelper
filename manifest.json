@@ -1,0 +1,23 @@
+{
+	"name": "Choco Hyperiums Helper",
+	"description": "Tool that extends the Hyperiums user interface",
+	"version": "1.0",
+	"manifest_version": 3,
+	"background": {
+		"service_worker": "background.js"
+	},
+	"content_scripts":[
+    {
+      "matches":[
+        "*://www.hyperiums.com/*"
+      ],
+			"css": ["style.css"],
+      "js": ["jquery-3.6.0.min.js", "content.js"],
+	  	"run_at": "document_end"
+    }
+	],
+	"permissions": ["webRequest", "storage", "activeTab"],
+	"icons": { "16": "icon16.png",
+           "48": "icon48.png",
+          "128": "icon128.png" }
+}

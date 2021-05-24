@@ -1,0 +1,43 @@
+#chocoavgptab {
+  display: block;
+  position: absolute;
+  top: 300px;
+  left: 100px;
+}
+
+#chocoavgptab table {
+  border: 1px solid gray;
+  border-collapse: separate;
+  border-radius: 5px;
+}
+
+#chocoavgptab td, #chocoavgptab th {
+  border-bottom: 1px solid #1C2833;
+  border-collapse: collapse;
+  padding: 2px;
+}
+
+td.chocoNrjBar {
+  width: 6px;
+  height: 15px;
+	border-radius: 2px;
+}
+td.chocoNrj1 {
+  background-color: #A23B12;
+}
+td.chocoNrj2 {
+  background-color: #A27F12;
+}
+td.chocoNrj3 {
+  background-color: #8CA212;
+}
+td.chocoNrj4 {
+  background-color: #057503;
+}
+td.chocoNrjStr {
+
+}
+
+.chocoNewThread {
+  color: #5A89FF;
+}
