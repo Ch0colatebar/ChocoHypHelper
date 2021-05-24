@@ -57,21 +57,12 @@ if (window.location.href.indexOf("Trading") > -1) {
 			otherField.val(firstField.val());
 		}
 	}
-
-	/* Highlight or fade planets */
-	$("a[href^='Planetprod']").each(function () {
-		const planetsToFade = ['Aspicot', 'Magneti'];
-
-		let planetName = $(this).text();
-		if(planetsToFade.includes(planetName)) {
-			$(this).closest('tr').css('background-color', 'gray');
-		}
-	});
 }
 
 // Forum page - thread list
 if(window.location.href.indexOf("forumid") > -1 && window.location.href.indexOf("threadid") <= 0) {
 	const regex = /threadid=(?<threadid>[0-9]+)/;
+	const playerName = $('a.megaTextItem[rel="playerSubmenu"]').text().split(' ')[1];
 
 	$('table.forumArray tr').each(function() {
 		var thisTr = $(this);
@@ -87,10 +78,16 @@ if(window.location.href.indexOf("forumid") > -1 && window.location.href.indexOf(
 		let lastPostDate = $(this).find("td:eq(3)").text();
 		lastPostDate = lastPostDate.replace(' ', 'T');
 
+		// last author
+		let lastAuthor = $(this).find("td:eq(4)").text();
+
 		chrome.storage.sync.get([thisThreadId], function(result) {
 			result = result[thisThreadId];
+			let playerIsNotTheAuthor = playerName != lastAuthor;
 
-			if($.isEmptyObject(result) || !result.read || new Date(lastPostDate).getTime() > new Date(result.lastread).getTime())  {
+			if(playerIsNotTheAuthor &&
+				($.isEmptyObject(result) || !result.read
+			|| new Date(lastPostDate).getTime() > new Date(result.lastread).getTime()))  {
 				// Addind a flag for UNREAD threads
 				thisTr.find("td:first-child").prepend('<span class="microtext chocoNewThread">[NEW] </span>');
 			}
