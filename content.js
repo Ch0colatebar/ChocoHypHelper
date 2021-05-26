@@ -56,7 +56,7 @@ if (window.location.href.indexOf("Alliance") > -1) {
 
 	container.on('click', '#btn_exportTxt', function(){
 		this.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(str);
-    this.download = 'export.txt';
+    this.download = 'CoreData.txt';
 	});
 }
 
