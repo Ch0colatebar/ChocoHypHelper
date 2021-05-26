@@ -49,11 +49,8 @@ if (window.location.href.indexOf("Alliance") > -1) {
 		firstLine = false;
 	});
 
-console.log("str", str);
-
 	// Adding the button to export
 	let btnPlanet = $("input[name='searchplanet']");
-	console.log(btnPlanet);
 	let container = btnPlanet.parent();
 	btnPlanet.after('<button><a href="#" class="button" id=\"btn_exportTxt\">Export .txt</a></button>');
 
