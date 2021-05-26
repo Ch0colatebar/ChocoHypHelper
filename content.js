@@ -29,6 +29,73 @@ if(window.location.href.indexOf("Home") > -1 || window.location.href.indexOf("Pr
 	});
 }
 
+// Alliance page (extract for HyperiumsWatchdog)
+if (window.location.href.indexOf("Alliance") > -1) {
+	// Generating the string with players and planets + now time
+	const nowISOStr = new Date().toISOString();
+	let nowStr = nowISOStr.substring(0, 10)+" "+nowISOStr.substring(11, 19);
+	var str = "# Generated: "+nowStr+"\n";
+	str += "#> PlayerRank PlayerName PlanetNames*\n";
+	let firstLine = true;
+
+	$('tr.line0').each(function() {
+		let playerName = $(this).find('td:eq(0)').text();
+		let playerPlanets = $(this).find('td:eq(1)').text();
+
+		if(!firstLine) {
+			str += "\n";
+		}
+		str += playerName +"\t"+playerPlanets;
+		firstLine = false;
+	});
+
+console.log("str", str);
+
+	// Adding the button to export
+	let btnPlanet = $("input[name='searchplanet']");
+	console.log(btnPlanet);
+	let container = btnPlanet.parent();
+	btnPlanet.after('<button><a href="#" class="button" id=\"btn_exportTxt\">Export .txt</a></button>');
+
+	container.on('click', '#btn_exportTxt', function(){
+		this.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(str);
+    this.download = 'export.txt';
+	});
+}
+
+// Fleets
+if (window.location.href.indexOf("Fleets") > -1 && $("div.banner").length > 0) {
+	let gasOnPlanetList = [];
+
+  // Retrieves planets ground armies data
+	$("div[class*='planetCard']").each(function() {
+		let planetName = new String($(this).find("a.planet").text());
+		let planetRace = $(this).find("img.vc").next().text().charAt(0);
+		let groundAvgp = $(this).find("td:contains('Ground')").siblings(".vb").text();
+		groundAvgp = parseFloat(groundAvgp.substring(0, groundAvgp.length-1));
+		gasOnPlanetList.push({ planetName: planetName, planetRace: planetRace, groundAvgp: groundAvgp});
+	});
+
+	// Sort table by race then by groundAvgp
+	sortAvgpTable(gasOnPlanetList);
+
+	// Display a table with GAs data
+	let html = `<div id="chocoavgptab"><table><tr><thead><th>Planet</th><th>Race</th><th>GAs</th></thead></tr><tbody>`;
+	gasOnPlanetList.forEach((planet) => {
+		html += '<tr><td>'+planet.planetName+'</td><td>'+planet.planetRace+'</td><td>'+planet.groundAvgp+'</td></tr>';
+	});
+	html += `</tbody></table></div>`;
+	$("body").append(html);
+}
+
+function sortAvgpTable(table) {
+	function compare(a, b) {
+    return a.planetRace.localeCompare(b.planetRace) || b.groundAvgp - a.groundAvgp;
+	}
+
+	table.sort(compare);
+}
+
 // Trading page
 if (window.location.href.indexOf("Trading") > -1) {
 	const firstField = $('input[name="expl0"]');
