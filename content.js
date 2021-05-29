@@ -37,15 +37,19 @@ if (window.location.href.indexOf("Alliance") > -1) {
 	var str = "# Generated: "+nowStr+"\n";
 	str += "#> PlayerRank PlayerName PlanetNames*\n";
 	let firstLine = true;
+	let secondLine = true;
 
-	$('tr.line0').each(function() {
+	$('table.array tr').each(function() {
 		let playerName = $(this).find('td:eq(0)').text();
 		let playerPlanets = $(this).find('td:eq(1)').text();
 
 		if(!firstLine) {
-			str += "\n";
+			if(!secondLine) {
+				str += "\n";
+			}
+			str += playerName +"\t"+playerPlanets;
+			secondLine = false;
 		}
-		str += playerName +"\t"+playerPlanets;
 		firstLine = false;
 	});
 
