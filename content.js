@@ -35,7 +35,6 @@ if (window.location.href.indexOf("Cash") > -1) {
 	let fleetsUpkeep = -Number.parseInt($('table.cashArray td:eq(5)').text().replace(/,/g, ''));
 
 	let fleetUpkeepRate = Number.parseFloat(fleetsUpkeep / ti * 100).toPrecision(2);
-	console.log("n : ", ti, fleetsUpkeep, fleetUpkeepRate);
 
 	let fleetsUpkeedLbl = $('table.cashArray td:eq(4)').text();
 	$('table.cashArray td:eq(4)').text(fleetsUpkeedLbl + " ("+fleetUpkeepRate+"%)");
