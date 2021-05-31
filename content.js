@@ -58,7 +58,7 @@ if (window.location.href.indexOf("Alliance") > -1) {
 			if(!secondLine) {
 				str += "\n";
 			}
-			str += playerName +"\t"+playerPlanets;
+			str += playerName +"\t"+playerPlanets+"\t";
 			secondLine = false;
 		}
 		firstLine = false;
