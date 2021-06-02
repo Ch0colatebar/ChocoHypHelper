@@ -38,6 +38,7 @@ if (window.location.href.indexOf("Cash") > -1) {
 
 	let fleetsUpkeedLbl = $('table.cashArray td:eq(4)').text();
 	$('table.cashArray td:eq(4)').text(fleetsUpkeedLbl + " ("+fleetUpkeepRate+"%)");
+	$('div.cashTotals table.cashArray:eq(1) td:eq(4)').text(fleetsUpkeedLbl + " ("+fleetUpkeepRate+"%)");
 }
 
 // Alliance page (extract for HyperiumsWatchdog)
