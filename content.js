@@ -77,7 +77,7 @@ if (window.location.href.indexOf("Alliance") > -1) {
 }
 
 // Fleets
-if (window.location.href.indexOf("Fleets") > -1 && $("div.banner").length > 0) {
+if (window.location.href.indexOf("Fleets") > -1 && $("div.banner").length > 0 && window.location.href.indexOf("moving_fleets") <= 0) {
 	let gasOnPlanetList = [];
 
   // Retrieves planets ground armies data
